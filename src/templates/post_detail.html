@@ -11,7 +11,8 @@
     <img src="{{ instance.image.url }}" class="img-responsive" alt="" />
     {% endif %}
     <h1>{{ title }}</h1>
-    <h2>{{ instance.timestamp }}</h2>
+    <h2>Author: {{ instance.user }}</h2>
+    <h3>{{ instance.timestamp }}</h3>
 
     {{ instance.content }}<br/>
 
