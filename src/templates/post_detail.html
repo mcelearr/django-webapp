@@ -6,12 +6,15 @@
 
 
 {% block content %}
-  <h1>{{ title }}</h1>
+  <div class="col-sm-6 col-sm-offset-3">
+    {% if instance.image %}
+    <img src="{{ instance.image.url }}" class="img-responsive" alt="" />
+    {% endif %}
+    <h1>{{ title }}</h1>
+    <h2>{{ instance.timestamp }}</h2>
 
-  {{ instance.title }}<br/>
-  {{ instance.content }}<br/>
-  {{ instance.timestamp }}<br/>
-  {{ instance.updated }}<br/>
-  {{ instance.id }}<br/>
+    {{ instance.content }}<br/>
+
+  </div>
 
 {% endblock content %}
