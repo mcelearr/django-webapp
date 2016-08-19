@@ -14,8 +14,8 @@ class PostForm(forms.ModelForm):
 
 class CreateUserForm(forms.Form):
     username = forms.CharField(max_length=30)
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
     password=forms.CharField(max_length=30,widget=forms.PasswordInput())
     email=forms.EmailField(required=False)
 
