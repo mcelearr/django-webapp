@@ -11,6 +11,14 @@
     <link rel="stylesheet" href='{% static "css/base.css" %}' charset="utf-8">
   </head>
   <body>
+    <div>
+      {{ user }}
+      {% if user.is_anonymous %}
+      <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
+      {% else %}
+      <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+      {% endif %}
+    </div>
     {% include "messages_display.html" %}
     <div class="container">
       {% block content %}

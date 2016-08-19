@@ -7,20 +7,7 @@ from django.contrib.auth import authenticate, login
 from .forms import PostForm
 from .models import Post
 
-# def login(request):
-#     username = request.POST['username']
-#     password = request.POST['password']
-#     user = authenticate(username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         print "user exists"
-#     else:
-#         print "user doesn't exist"
-
 def post_create(request):
-    print request.user
-    if not request.user.is_staff:
-        raise Http404
     if not request.user.is_authenticated():
         raise Http404
     form = PostForm(request.POST or None, request.FILES or None)
