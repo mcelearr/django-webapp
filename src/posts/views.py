@@ -1,12 +1,24 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 from .forms import PostForm
 from .models import Post
 
+# def login(request):
+#     username = request.POST['username']
+#     password = request.POST['password']
+#     user = authenticate(username=username, password=password)
+#     if user is not None:
+#         login(request, user)
+#         print "user exists"
+#     else:
+#         print "user doesn't exist"
+
 def post_create(request):
+    print request.user
     if not request.user.is_staff:
         raise Http404
     if not request.user.is_authenticated():
