@@ -40,8 +40,12 @@ def post_list(request):
 
 def post_update(request, slug=None):
     if not request.user.is_authenticated():
+        messages.error(request, "Please log in to update a post")
         return redirect('/login')
     instance = get_object_or_404(Post, slug=slug)
+    if not request.user == instance.user:
+        messages.error(request, "Please log in as the correct user to update a post")
+        return redirect('/login')
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -58,8 +62,12 @@ def post_update(request, slug=None):
 
 def post_delete(request, slug=None):
     if not request.user.is_authenticated():
+        messages.error(request, "Please log in to update a post")
         return redirect('/login')
     instance = get_object_or_404(Post, slug=slug)
+    if not request.user == instance.user:
+        messages.error(request, "Please log in as the correct user to delete a post")
+        return redirect('/login')
     instance.delete()
     messages.success(request, "Successfuly Deleted")
     return redirect("list")
