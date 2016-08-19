@@ -17,10 +17,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.contrib import admin
+from django.contrib import admin, auth
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
     url(r'^posts/', include("posts.urls")),
 ]
 
