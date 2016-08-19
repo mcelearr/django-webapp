@@ -9,7 +9,7 @@ from .models import Post
 
 def post_create(request):
     if not request.user.is_authenticated():
-        raise Http404
+        return redirect('/login')
     form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -39,8 +39,8 @@ def post_list(request):
     return render(request, "post_list.html", context)
 
 def post_update(request, slug=None):
-    if not request.user.is_staff:
-        raise Http404
+    if not request.user.is_authenticated():
+        return redirect('/login')
     instance = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
@@ -57,8 +57,8 @@ def post_update(request, slug=None):
 
 
 def post_delete(request, slug=None):
-    if not request.user.is_staff:
-        raise Http404
+    if not request.user.is_authenticated():
+        return redirect('/login')
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "Successfuly Deleted")
