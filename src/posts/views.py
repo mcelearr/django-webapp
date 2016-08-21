@@ -40,6 +40,9 @@ def post_create(request):
 
 def post_detail(request, slug):
     instance = get_object_or_404(Post, slug=slug)
+    if instance.draft:
+        if not request.user.is_authenticated():
+            raise Http404
     context = {
         "title": "Detail",
         "instance": instance,
@@ -47,7 +50,7 @@ def post_detail(request, slug):
     return render(request, "post_detail.html", context)
 
 def post_list(request):
-    queryset = Post.objects.all()
+    queryset = Post.objects.active()
     context = {
         "object_list": queryset,
         "title": "List"
