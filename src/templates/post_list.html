@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{ title }} </h1>
   <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{ title }} </h1>
+    <form action="" method="get">
+      <input type="text" name="query" placeholder="Search Posts" />
+      <input type="submit" value="Search" />
+    </form>
     <div class="row">
     {% for obj in object_list %}
       <div class="col-sm-6">
