@@ -23,7 +23,9 @@
     <h3>{{ instance.timestamp }}</h3>
 
     {{ instance.content }}<br/>
-
+  {% if instance.user == user %}
+    <a class="btn btn-default" href="/{{ instance.slug }}/edit">Edit post</a>
+  {% endif %}
   </div>
 
 {% endblock content %}

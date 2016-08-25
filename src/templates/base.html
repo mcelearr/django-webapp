@@ -11,13 +11,20 @@
     <link rel="stylesheet" href='{% static "css/base.css" %}' charset="utf-8">
   </head>
   <body>
-    <div>
+    <div class="authentication">
       {{ user }}
       {% if user.is_anonymous %}
-      <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
-      {% else %}
-      <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+      <div class="login">
+        <a class="btn btn-default" href="{% url 'django.contrib.auth.views.login' %}">login</a>
+      </div>
+        {% else %}
+      <div class="logout">
+        <a class="btn btn-default" href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+      </div>
       {% endif %}
+      <div class="register">
+        <a class="btn btn-primary" href="/new-user">register</a>
+      </div>
     </div>
     {% include "messages_display.html" %}
     <div class="container">

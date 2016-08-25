@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+  <h1>{{ title }} </h1>
+  <form action="" method="get">
+    <input type="text" name="query" placeholder="Search Posts" />
+    <input type="submit" value="Search" />
+  </form>
+  <div class="new-post">
+  {% if user.is_anonymous %}
+    <p>Log in to create a new post</p>
+  {% else %}
+    <a class="btn btn-default" href="/create">New Post</a>
+  {% endif %}
+  </div>
   <div class="col-sm-8 col-sm-offset-2">
-    <h1>{{ title }} </h1>
-    <form action="" method="get">
-      <input type="text" name="query" placeholder="Search Posts" />
-      <input type="submit" value="Search" />
-    </form>
     <div class="row">
     {% for obj in object_list %}
       <div class="col-sm-6">
