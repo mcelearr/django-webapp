@@ -52,6 +52,7 @@ def post_detail(request, slug):
 
 def post_list(request):
     queryset = Post.objects.active()
+    dashboard = Post.objects.dashboard(user=request.user)
     query = request.GET.get("query")
     if query:
         queryset = queryset.filter(

@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{ title }} </h1>
-  <form action="" method="get">
-    <input type="text" name="query" placeholder="Search Posts" />
-    <input type="submit" value="Search" />
-  </form>
+  <div class="search-bar">
+    <form action="" method="get">
+      <input type="text" name="query" placeholder="Search Posts" />
+      <input class="btn btn-default" type="submit" value="Search" />
+    </form>
+  </div>
+  <div class="filter">
+    <div class="search-bar">
+      <form action="" method="get">
+        <input class="btn btn-default" type="submit" name="all-posts" value="All Posts" />
+        <input class="btn btn-primary" type="submit" name="dashboard" value="My Posts" />
+      </form>
+  </div>
   <div class="new-post">
   {% if user.is_anonymous %}
     <p>Log in to create a new post</p>
