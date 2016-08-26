@@ -4,6 +4,7 @@ from django.contrib import admin
 from .views import (
     user_create,
     post_list,
+    dashboard,
     post_create,
     post_detail,
     post_update,
@@ -12,6 +13,7 @@ from .views import (
 
 urlpatterns = [
     url(r'^$', post_list, name='list'),
+    url(r'^dashboard/$', dashboard),
     url(r'^new-user/$', user_create),
     url(r'^create/$', post_create),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),

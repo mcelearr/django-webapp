@@ -7,11 +7,10 @@
     </form>
   </div>
   <div class="filter">
-    <div class="search-bar">
-      <form action="" method="get">
-        <input class="btn btn-default" type="submit" name="all-posts" value="All Posts" />
-        <input class="btn btn-primary" type="submit" name="dashboard" value="My Posts" />
-      </form>
+    <a href="/" class="btn btn-default" role="button">All Posts</a>
+    {% if not user.is_anonymous %}
+    <a href="/dashboard" class="btn btn-primary" role="button">My Posts</a>
+    {% endif %}
   </div>
   <div class="new-post">
   {% if user.is_anonymous %}

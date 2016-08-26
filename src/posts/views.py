@@ -52,7 +52,6 @@ def post_detail(request, slug):
 
 def post_list(request):
     queryset = Post.objects.active()
-    dashboard = Post.objects.dashboard(user=request.user)
     query = request.GET.get("query")
     if query:
         queryset = queryset.filter(
@@ -61,7 +60,19 @@ def post_list(request):
         ).distinct()
     context = {
         "object_list": queryset,
-        "title": "List"
+    }
+    return render(request, "post_list.html", context)
+
+def dashboard(request):
+    queryset = Post.objects.dashboard(user=request.user)
+    query = request.GET.get("query")
+    if query:
+        queryset = queryset.filter(
+        Q(title__icontains=query)|
+        Q(content__icontains=query)
+        ).distinct()
+    context = {
+        "object_list": queryset,
     }
     return render(request, "post_list.html", context)
 
