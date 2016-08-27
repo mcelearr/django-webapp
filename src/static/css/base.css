@@ -1,3 +1,16 @@
 h1 {
   color: #777777;
 }
+
+.navbar {
+  padding: 10px;
+  background-color: grey;
+}
+
+.login {
+  display: inline-block;
+}
+
+.register {
+  display: inline-block;  
+}

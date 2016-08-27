@@ -11,20 +11,45 @@
     <link rel="stylesheet" href='{% static "css/base.css" %}' charset="utf-8">
   </head>
   <body>
-    <div class="authentication">
-      {{ user }}
-      {% if user.is_anonymous %}
-      <div class="login">
-        <a class="btn btn-default" href="{% url 'django.contrib.auth.views.login' %}">login</a>
-      </div>
-      <div class="register">
-        <a class="btn btn-primary" href="/new-user">register</a>
-      </div>      
+    <div class="container-fluid">
+      <div class="navbar row">
+        <div class="user col-sm-1">
+          <span>{{ user }}</span>
+        </div>
+        <div class="authentication col-sm-2">
+          {% if user.is_anonymous %}
+          <div class="login">
+            <a class="btn btn-default" href="{% url 'django.contrib.auth.views.login' %}">login</a>
+          </div>
+          <div class="register">
+            <a class="btn btn-primary" href="/new-user">register</a>
+          </div>
+            {% else %}
+          <div class="logout">
+            <a class="btn btn-default" href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+          </div>
+          {% endif %}
+        </div>
+        <div class="new-post col-sm-3">
+        {% if user.is_anonymous %}
+          <p>Log in to create a new post</p>
         {% else %}
-      <div class="logout">
-        <a class="btn btn-default" href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+          <a class="btn btn-default" href="/create">New Post</a>
+        {% endif %}
+        </div>
+        <div class="filter col-sm-3">
+          <a href="/" class="btn btn-default" role="button">All Posts</a>
+          {% if not user.is_anonymous %}
+          <a href="/dashboard" class="btn btn-primary" role="button">My Posts</a>
+          {% endif %}
+        </div>
+        <div class="search-bar col-sm-3">
+          <form action="" method="get">
+            <input type="text" name="query" placeholder="Search Posts" />
+            <input class="btn btn-default" type="submit" value="Search" />
+          </form>
+        </div>
       </div>
-      {% endif %}
     </div>
     {% include "messages_display.html" %}
     <div class="container">
