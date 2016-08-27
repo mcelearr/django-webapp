@@ -11,6 +11,9 @@ from django.utils.text import slugify
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
         return super(PostManager, self).filter(draft=False)
+    def dashboard(self, *args, **kwargs):
+        for key, value in kwargs.iteritems():
+            return super(PostManager, self).filter(user=value)
 
 def upload_location(instance, filename):
     return "%s/%s" %(instance.id, filename)

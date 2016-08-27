@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -51,9 +52,27 @@ def post_detail(request, slug):
 
 def post_list(request):
     queryset = Post.objects.active()
+    query = request.GET.get("query")
+    if query:
+        queryset = queryset.filter(
+        Q(title__icontains=query)|
+        Q(content__icontains=query)
+        ).distinct()
     context = {
         "object_list": queryset,
-        "title": "List"
+    }
+    return render(request, "post_list.html", context)
+
+def dashboard(request):
+    queryset = Post.objects.dashboard(user=request.user)
+    query = request.GET.get("query")
+    if query:
+        queryset = queryset.filter(
+        Q(title__icontains=query)|
+        Q(content__icontains=query)
+        ).distinct()
+    context = {
+        "object_list": queryset,
     }
     return render(request, "post_list.html", context)
 

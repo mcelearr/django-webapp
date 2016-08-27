@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
-    url(r'^posts/', include("posts.urls")),
+    url(r'', include("posts.urls")),
 ]
 
 if settings.DEBUG:
